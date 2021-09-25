@@ -5,7 +5,8 @@ using namespace home_service;
 int main(int argc, char **argv) {
     ros::init(argc, argv, "pick_objects_node");
 
-    NavigationClient navigationClient {};
+    ros::NodeHandle nh {};
+    NavigationClient navigationClient { nh };
 
     float x { 4.0 }, y { 0.0 };
     ROS_INFO("Robot is travelling to the pick up zone");

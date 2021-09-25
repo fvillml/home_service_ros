@@ -1,0 +1,9 @@
+string frame_id
+string ns
+int32 id 
+string action
+float32 x
+float32 y
+---
+bool result
+string msg

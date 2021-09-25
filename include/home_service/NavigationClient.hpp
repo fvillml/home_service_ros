@@ -1,22 +1,32 @@
 #pragma once
 
+#include <mutex>
+
 #include <ros/ros.h>
+
 #include <actionlib/client/simple_action_client.h>
+
 #include <move_base_msgs/MoveBaseAction.h>
+
 #include <tf2/LinearMath/Quaternion.h>
+
+#include "home_service/Goal.h"
 
 namespace home_service {
 
 /**
  * @brief Class charged of requesting new goals to the move_base node.
- * 
+ *
  */
 class NavigationClient {
 public:
     /**
      * @brief Construct a new NavigationClient object.
+     *
+     * @param nodeHandler Node handler used to create a subcriber for goal_msgs.
      */
-    NavigationClient();
+    NavigationClient(ros::NodeHandle& nodeHandler);
+
     ~NavigationClient() = default;
 
     /**
@@ -42,12 +52,14 @@ public:
 private:
     /**
      * @brief Set the goal for the current request.
-     * 
+     *
      * @param x x coordinate of the new request.
      * @param y y coordinate of the new request.
-     * @param yaw yaw angle of the new request. In degrees. 
+     * @param yaw yaw angle of the new request. In degrees.
      */
     void setCurrentGoal(const float& x, const float& y, const int& yaw);
+
+    void goalCallback(const home_service::Goal::ConstPtr& msg);
 
     /** Client type*/
     typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
@@ -61,6 +73,12 @@ private:
 
     /** Indicates whether the service is ready and connected */
     bool mIsReady { false };
+
+    ros::Subscriber mGoalSubscriber;
+
+    std::mutex mNavigateMutex {};
+
+    std::atomic_bool mIsNavigating { false };
 };
 
 } // namespace home_service
