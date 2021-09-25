@@ -1,19 +1,19 @@
-#include "home_service/HomeService.hpp"
+#include "home_service/NavigationClient.hpp"
 
 using namespace home_service;
 
 int main(int argc, char **argv) {
     ros::init(argc, argv, "pick_objects_node");
 
-    HomeService homeService {};
+    NavigationClient navigationClient {};
 
     float x { 4.0 }, y { 0.0 };
     ROS_INFO("Robot is travelling to the pick up zone");
-    if (homeService.goTo(x, y)) {
+    if (navigationClient.navigate(x, y)) {
         ROS_INFO("Robot picked up the virtual object");
     } else {
         ROS_INFO("The robot failed to pick up the virtual object");
-        ROS_INFO("%s", homeService.getState().c_str());
+        ROS_INFO("%s", navigationClient.getState().c_str());
         return -1;
     }
 
@@ -23,11 +23,11 @@ int main(int argc, char **argv) {
     y = 2.5;
     int yaw { 180 };
     ROS_INFO("Robot is travelling to the drop off zone");
-    if (homeService.goTo(x, y, yaw)) {
+    if (navigationClient.navigate(x, y, yaw)) {
         ROS_INFO("Robot dropped the virtual object");
     } else {
         ROS_INFO("The robot failed to drop the virtual object");
-        ROS_INFO("%s", homeService.getState().c_str());
+        ROS_INFO("%s", navigationClient.getState().c_str());
         return -1;
     }
 

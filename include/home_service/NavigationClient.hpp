@@ -11,13 +11,13 @@ namespace home_service {
  * @brief Class charged of requesting new goals to the move_base node.
  * 
  */
-class HomeService {
+class NavigationClient {
 public:
     /**
-     * @brief Construct a new HomeService object.
+     * @brief Construct a new NavigationClient object.
      */
-    HomeService();
-    ~HomeService() = default;
+    NavigationClient();
+    ~NavigationClient() = default;
 
     /**
      * @brief Request the move_base to go to a position in the 2D plane
@@ -30,7 +30,7 @@ public:
      * @return true
      * @return false
      */
-    bool goTo(const float& x, const float& y, const int& yaw = 0);
+    bool navigate(const float& x, const float& y, const int& yaw = 0);
 
     /**
      * @brief Get the state of the last goTo request.

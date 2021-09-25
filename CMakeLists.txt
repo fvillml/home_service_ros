@@ -133,8 +133,7 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(pick_objects_node src/pick_objects.cpp src/HomeService.cpp)
-
+add_executable(pick_objects_node src/pick_objects.cpp src/NavigationClient.cpp)
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -146,9 +145,7 @@ add_executable(pick_objects_node src/pick_objects.cpp src/HomeService.cpp)
 add_dependencies(pick_objects_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(pick_objects_node
-  ${catkin_LIBRARIES}
-)
+target_link_libraries(pick_objects_node ${catkin_LIBRARIES} )
 
 #############
 ## Install ##
