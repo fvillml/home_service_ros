@@ -1,0 +1,13 @@
+global_costmap:
+   # The global frame for the costmap to operate in. 
+   global_frame: map
+
+   # The name of the frame for the base link of the robot. 
+   robot_base_frame: base_link
+   update_frequency: 2.0
+   publish_frequency: 2.0
+   width: 20.0
+   height: 20.0
+   resolution: 0.05
+   static_map: true
+   rolling_window: false

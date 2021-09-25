@@ -1,0 +1,52 @@
+local_costmap:
+   # Sequence of plugin specifications, one per layer. The default namespaces are static_layer, 
+   # obstacle_layer and inflation_layer. static_layer asumes you have a static map being published, 
+   # with something like 
+   plugins: 
+   - {name: obstacles,        type: "costmap_2d::VoxelLayer"}
+
+   obstacles:
+      # A list of observation source names separated by spaces. This defines each of the <source_name> parameters.
+      observation_sources: laser_scan_sensor
+      # Each source_name in observation_sources defines a namespace in which parameters can be set: 
+      laser_scan_sensor: {
+         # The frame of the origin of the sensor.
+         sensor_frame: hokuyo, 
+         # The data type associated with the topic, right now only "PointCloud", "PointCloud2", and "LaserScan" are supported.
+         data_type: LaserScan, 
+         # The topic on which sensor data comes in for this source. Defaults to the name of the source. 
+         topic: scan, 
+         # Whether or not this observation should be used to mark obstacles.
+         marking: true, 
+         # Whether or not this observation should be used to clear out freespace.
+         clearing: false, 
+         # The maximum range in meters at which to insert obstacles into the costmap using sensor data. 
+         obstacle_range: 5.0}
+      
+      # If false, each pixel has one of 2 states: lethal obstacle or free. If true, each pixel has one of 3 states: lethal obstacle, free, or unknown. 
+      track_unknown_space: true
+
+      # If true, the robot footprint will clear (mark as free) the space in which it travels. 
+      footprint_clearing_enabled: true
+
+         
+   # The global frame for the costmap to operate in. 
+   global_frame: odom
+
+   # Whether or not to use a rolling window version of the costmap.
+   rolling_window: true
+
+   # The width of the map in meters.
+   width: 5.0
+
+   # The height of the map in meters. 
+   height: 5.0
+
+   # The resolution of the map in meters/cell. 
+   resolution: 0.03
+
+   # The x origin of the map in the global frame in meters. 
+   origin_x: 0.0
+
+   # The y origin of the map in the global frame in meters. 
+   origin_y: 0.0

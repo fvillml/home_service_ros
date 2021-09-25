@@ -1,0 +1,41 @@
+global_costmap:
+   # Sequence of plugin specifications, one per layer. The default namespaces are static_layer, 
+   # obstacle_layer and inflation_layer. static_layer asumes you have a static map being published, 
+   # with something like 
+   # plugins: 
+   # - {name: static,        type: "costmap_2d::StaticLayer"}
+
+   # The value for which a cost should be considered unknown when reading in a map from the map server. 
+   # If the costmap is not tracking unknown space, costs of this value will be considered occupied.
+   # unknown_cost_value: -1
+
+   # The threshold value at which to consider a cost lethal when reading in a map from the map server. 
+   # lethal_cost_threshold: 100
+
+   # The topic that the costmap subscribes to for the static map. 
+   # map_topic: map
+
+   # Only subscribe to the first message on the map topic, ignoring all subsequent messages 
+   # first_map_only: true
+
+   # In addition to map_topic, also subscribe to map_topic + "_updates"
+   # subscribe_to_updates: false
+
+   # If true, unknown values in the map messages are translated directly to the layer. 
+   # Otherwise, unknown values in the map message are translated as FREE_SPACE in the layer. 
+   # track_unknown_space: true
+
+   # Only matters if the static layer is not the bottom layer. If true, only the maximum value will be 
+   # written to the master costmap. 
+   # use_maximum: false
+
+   # If true, translates all map message values to NO_INFORMATION/FREE_SPACE/LETHAL_OBSTACLE (three values). 
+   # If false, a full spectrum of intermediate values is possible. 
+   # trinary_costmap: true
+
+   # The global frame for the costmap to operate in. 
+   static_map: true
+   global_frame: map
+
+   # Whether or not to use a rolling window version of the costmap.
+   rolling_window: false

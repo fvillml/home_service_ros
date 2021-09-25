@@ -1,0 +1,48 @@
+<launch>
+    <!-- Map server -->
+    <arg name="map_file" default="$(find diff_robot_gazebo)/maps/small_room.yaml" />
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+    <!-- AMCL node-->
+    <node name="amcl" pkg="amcl" type="amcl" output="screen">
+        <!-- Filter settings-->
+        <param name="odom_model_type" value="diff" />
+        <param name="min_particles" value="1000" />
+        <param name="max_particles" value="2000" />
+        <param name="kld_err" value="0.5" />
+        <param name="update_min_d" value="0.01" />
+        <param name="update_min_a" value="0.1" />
+        <param name="resample_interval" value="1" />
+        <param name="gui_publish_rate" value="1.0" />
+        <param name="use_map_topic" value="true" />
+
+        <param name="odom_alpha1" value="0.05" />
+        <param name="odom_alpha2" value="0.05" />
+        <param name="odom_alpha3" value="0.05" />
+        <param name="odom_alpha4" value="0.05" />
+        <param name="odom_alpha5" value="0.05" />
+        <param name="odom_frame_id" value="odom" />
+        <param name="odom_model_type" value="diff-corrected" />
+        <param name="base_frame_id" value="base_link" />
+        <param name="global_frame_id" value="map" />
+    </node>
+
+    <!-- Move base -->
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base_node" output="screen">
+        <!-- The name of the plugin for the global planner to use with move_base -->
+        <param name="base_global_planner" value="navfn/NavfnROS" />
+        <!-- The name of the plugin for the local planner to use with move_base -->
+        <param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS" />
+        <!-- The rate in Hz at which to run the control loop and send velocity commands to the base.  -->
+        <param name="controller_frequency" value="50.0" />
+
+        <rosparam file="$(find home_service)/move_base_config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find home_service)/move_base_config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find home_service)/move_base_config/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find home_service)/move_base_config/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find home_service)/move_base_config/base_local_planner_params.yaml" command="load" />
+        <rosparam file="$(find home_service)/move_base_config/navfn_params.yaml" command="load" />
+    </node>
+
+
+</launch>
