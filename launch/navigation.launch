@@ -36,12 +36,12 @@
         <!-- The rate in Hz at which to run the control loop and send velocity commands to the base.  -->
         <param name="controller_frequency" value="50.0" />
 
-        <rosparam file="$(find home_service)/move_base_config/costmap_common_params.yaml" command="load" ns="global_costmap" />
-        <rosparam file="$(find home_service)/move_base_config/costmap_common_params.yaml" command="load" ns="local_costmap" />
-        <rosparam file="$(find home_service)/move_base_config/local_costmap_params.yaml" command="load" />
-        <rosparam file="$(find home_service)/move_base_config/global_costmap_params.yaml" command="load" />
-        <rosparam file="$(find home_service)/move_base_config/base_local_planner_params.yaml" command="load" />
-        <rosparam file="$(find home_service)/move_base_config/navfn_params.yaml" command="load" />
+        <rosparam file="$(find home_service)/config/move_base/home_service/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find home_service)/config/move_base/home_service/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find home_service)/config/move_base/home_service/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find home_service)/config/move_base/home_service/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find home_service)/config/move_base/home_service/base_local_planner_params.yaml" command="load" />
+        <rosparam file="$(find home_service)/config/move_base/home_service/navfn_params.yaml" command="load" />
     </node>
 
 

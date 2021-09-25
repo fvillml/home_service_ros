@@ -18,7 +18,7 @@ TrajectoryPlannerROS:
   holonomic_robot: false
 
   # The tolerance in radians for the controller in yaw/rotation when achieving its goal 
-  yaw_goal_tolerance: 0.05
+  yaw_goal_tolerance: 0.5
 
   # The tolerance in meters for the controller in the x & y distance when achieving a goal 
   xy_goal_tolerance: 0.1
