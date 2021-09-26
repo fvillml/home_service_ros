@@ -30,9 +30,9 @@ MarkerVisualizer::MarkerVisualizer(ros::NodeHandle& nodeHandler)
     mMarker.scale.z = 0.5;
 
     // Set the color -- be sure to set alpha to something non-zero!
-    mMarker.color.r = 1.0f;
-    mMarker.color.g = 0.0f;
-    mMarker.color.b = 0.0f;
+    mMarker.color.r = 0.97f;
+    mMarker.color.g = 0.58f;
+    mMarker.color.b = 0.03f;
     mMarker.color.a = 1.0;
 
     mMarker.lifetime = ros::Duration();

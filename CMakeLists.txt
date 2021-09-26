@@ -126,6 +126,7 @@ include_directories(
 add_library(${PROJECT_NAME}_lib
   src/${PROJECT_NAME}/NavigationClient.cpp
   src/${PROJECT_NAME}/MarkerVisualizer.cpp
+  src/${PROJECT_NAME}/GoalSupervisor.cpp
 )
 add_dependencies(${PROJECT_NAME}_lib home_service_generate_messages_cpp)
 target_link_libraries(${PROJECT_NAME}_lib ${catkin_LIBRARIES})
@@ -145,6 +146,10 @@ target_link_libraries(navigate_node ${catkin_LIBRARIES} ${PROJECT_NAME}_lib)
 add_executable(visualize_markers_node src/visualize_markers_node.cpp)
 add_dependencies(visualize_markers_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(visualize_markers_node ${catkin_LIBRARIES} ${PROJECT_NAME}_lib)
+
+add_executable(home_service_node src/home_service_node.cpp)
+add_dependencies(home_service_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(home_service_node ${catkin_LIBRARIES} ${PROJECT_NAME}_lib)
 
 
 #############
